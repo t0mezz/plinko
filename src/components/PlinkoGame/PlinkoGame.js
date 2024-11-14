@@ -71,7 +71,7 @@ const PlinkoGame = () => {
             // Update velocity with gravity
             const newVelocity = {
               x: ball.velocity.x,
-              y: ball.velocity.y + 0.3, // Further reduced gravity for gentler bounce
+              y: ball.velocity.y + 0.06, // Further reduced gravity for gentler bounce
             };
 
             let newPosition = {
@@ -178,7 +178,7 @@ const PlinkoGame = () => {
     setBudget((prev) => prev - ballPriceRef.current);
     const newBall = {
       id: Date.now(),
-      position: { x: 375, y: 0 },
+      position: { x: 375 + (Math.random() - 0.5) * 30, y: 70 },
       velocity: { x: (Math.random() - 0.5) * 1.2, y: 0 },
     };
     setBalls((prevBalls) => [...prevBalls, newBall]);
@@ -250,10 +250,10 @@ const PlinkoGame = () => {
 // Function to generate centered pyramid of pegs
 const generateCenteredPyramidPegs = (rows, centerX, startY) => {
   const pegs = [];
-  const spacingX = 45;
+  const spacingX = 55;
   const spacingY = 60;
 
-  for (let row = 0; row < rows; row++) {
+  for (let row = 2; row < rows; row++) {
     for (let col = 0; col <= row; col++) {
       pegs.push({
         x: centerX + (col - row / 2) * spacingX,
