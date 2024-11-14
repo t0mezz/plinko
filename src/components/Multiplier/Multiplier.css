@@ -1,0 +1,17 @@
+.multiplier {
+  position: absolute;
+  width: 45px;
+  height: 45px;
+  background-color: #61105Eff;
+  color: white;
+  text-align: center;
+  line-height: 60px;
+  border-radius: 10px;
+  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+
+.multiplier.hit {
+  transform: scale(1.2);
+  background-color: yellow;
+}

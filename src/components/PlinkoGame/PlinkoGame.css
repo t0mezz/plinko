@@ -1,0 +1,104 @@
+.game-board {
+  position: relative;
+  width: 750px;
+  height: 900px;
+  margin: 0 auto;
+  background-color: #f4f4f900;
+  overflow: hidden;
+}
+
+.multiplier-hit {
+  animation: bounce 0.5s ease-in-out;
+}
+
+.controls {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+
+.budget-display {
+  color: white;
+  font-size: 1.2em;
+}
+
+.price-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.price-input label {
+  color: white;
+}
+
+.multipliers-container {
+  position: absolute;
+  right: 20px;
+  top: 650px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+input {
+  width: 200px;
+  height: 40px;
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+  border: none;
+  outline: none;
+  cursor: text;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0px);
+  } 
+  50% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+
+.multipliers {
+  /* Existing styles */
+  display: flex;
+  align-items: center;
+}
+
+.user-interface {
+  position: absolute;
+  right: 30%;
+  top: 100px;
+}

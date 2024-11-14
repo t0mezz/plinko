@@ -1,0 +1,13 @@
+.ball {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: #FFE98A;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.ball.hit {
+  transform: scale(1.2);
+  background-color: gold;
+}
