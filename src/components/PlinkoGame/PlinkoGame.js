@@ -71,7 +71,7 @@ const PlinkoGame = () => {
             // Update velocity with gravity
             const newVelocity = {
               x: ball.velocity.x,
-              y: ball.velocity.y + 0.06, // Further reduced gravity for gentler bounce
+              y: ball.velocity.y + 0.1, // Further reduced gravity for gentler bounce
             };
 
             let newPosition = {
@@ -121,7 +121,7 @@ const PlinkoGame = () => {
               const withinY =
                 newPosition.y > mult.y && newPosition.y < mult.y + 45;
 
-              if (withinX && withinY && !hitMultiplier) {
+              if (withinX && withinY && !ball.hitMultiplier) {
                 // Play the corresponding sound if available
                 if (multiplierSounds[mult.multiplier]) {
                   try {
@@ -136,6 +136,7 @@ const PlinkoGame = () => {
 
                 // Update budget
                 setBudget((prev) => prev + ballPriceRef.current * mult.multiplier);
+                console.log("Ballprice: " + ballPriceRef.current + " | multiplier: " + mult.multiplier)
 
                 // Add animation class
                 const multiplierElement = multiplierRefs.current[index];
@@ -146,7 +147,7 @@ const PlinkoGame = () => {
                   }, 500);
                 }
 
-                hitMultiplier = true;
+                ball.hitMultiplier = true;
               }
             });
 
@@ -180,6 +181,7 @@ const PlinkoGame = () => {
       id: Date.now(),
       position: { x: 375 + (Math.random() - 0.5) * 30, y: 70 },
       velocity: { x: (Math.random() - 0.5) * 1.2, y: 0 },
+      multiplierFlag: false,
     };
     setBalls((prevBalls) => [...prevBalls, newBall]);
   };
