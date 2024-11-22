@@ -8,7 +8,7 @@ import '../Ball/Ball.css';
 
 // Load sounds for each multiplier
 const multiplierSounds = {
-  0.3: new Audio('/sounds/multiplier-0.3x.mp3'),
+  0.1: new Audio('/sounds/multiplier-0.1x.mp3'),
   0.5: new Audio('/sounds/multiplier-0.5x.mp3'),
   1: new Audio('/sounds/multiplier-1x.mp3'),
   2: new Audio('/sounds/multiplier-2x.mp3'),
@@ -39,7 +39,7 @@ const PlinkoGame = () => {
       { multiplier: 2, x: 214, y: 650, id: 2 },
       { multiplier: 1, x: 264, y: 650, id: 3 },
       { multiplier: 0.5, x: 314, y: 650, id: 4 },
-      { multiplier: 0.3, x: 364, y: 650, id: 5 },
+      { multiplier: 0.1, x: 364, y: 650, id: 5 },
       { multiplier: 0.5, x: 414, y: 650, id: 6 },
       { multiplier: 1, x: 464, y: 650, id: 7 },
       { multiplier: 2, x: 514, y: 650, id: 8 },
