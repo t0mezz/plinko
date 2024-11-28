@@ -102,3 +102,12 @@ input {
   right: 400px;
   top: 100px;
 }
+
+/* Add this to your CSS file */
+.particle {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  pointer-events: none;
+}

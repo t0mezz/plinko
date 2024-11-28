@@ -29,6 +29,7 @@ const PlinkoGame = () => {
   const [budget, setBudget] = useState(1000);
   const [ballPrice, setBallPrice] = useState(10);
   const multiplierRefs = useRef([]);
+  const [particles, setParticles] = useState([]);
 
   // Generate pegs and multipliers
   const pegs = useMemo(() => generateCenteredPyramidPegs(10, 375, 70), []);
@@ -172,6 +173,65 @@ const PlinkoGame = () => {
     return () => cancelAnimationFrame(animationRef.current);
   }, [pegs, multipliers]);
 
+
+  // Particle animation loop
+  useEffect(() => {
+    const animate = () => {
+      setParticles((prevParticles) =>
+        prevParticles
+          .map((particle) => ({
+            ...particle,
+            x: particle.x + particle.vx,
+            y: particle.y + particle.vy,
+            lifespan: particle.lifespan - 1,
+          }))
+          .filter((particle) => particle.lifespan > 0)
+      );
+      animationRef.current = requestAnimationFrame(animate);
+    };
+
+    animationRef.current = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationRef.current);
+  }, []);
+
+  // Add helper function to randomize color
+  const randomizeColor = (baseColor) => {
+    const baseColors = {
+      red: { r: 255, g: 0, b: 0 },
+      yellow: { r: 255, g: 255, b: 0 },
+      gold: { r: 255, g: 215, b: 0 },
+      // ...add other base colors if needed...
+    };
+
+    const base = baseColors[baseColor] || { r: 255, g: 255, b: 255 }; // default to white
+    const offset = 200; // maximum offset value
+
+    const r = Math.min(255, Math.max(0, base.r + (Math.random() - 0.5) * offset));
+    const g = Math.min(255, Math.max(0, base.g + (Math.random() - 0.5) * offset));
+    const b = Math.min(255, Math.max(0, base.b + (Math.random() - 0.5) * offset));
+
+    return `rgb(${Math.floor(r)}, ${Math.floor(g)}, ${Math.floor(b)})`;
+  };
+
+  // Modify startParticleExplosion function
+  const startParticleExplosion = (x, y, color, density = 300) => {
+    const maxSpeed = 1;
+    const maxLifespan = 25; // frames
+    const minLifespan = 3; // frames
+
+    const newParticles = Array.from({ length: density }, () => ({
+      x,
+      y,
+      vx: (Math.random() - 0.5) * maxSpeed * 2,
+      vy: (Math.random() - 0.5) * maxSpeed * 2,
+      lifespan: Math.floor(Math.random() * (maxLifespan - minLifespan + 1)) + minLifespan,
+      color: randomizeColor(color), // Use randomized color
+      size: .5, // Smaller size for particles
+    }));
+
+    setParticles((prev) => [...prev, ...newParticles]);
+  };
+
   const addBall = () => {
     if (budgetRef.current < ballPriceRef.current) {
       return;
@@ -229,10 +289,23 @@ const PlinkoGame = () => {
               x={mult.x}
               y={mult.y}
               id={mult.id}
-              onHit={() => {}}
+              onHit={() => { }}
             />
           ))}
         </div>
+
+        {particles.map((particle, index) => (
+          <div
+            key={index}
+            className="particle"
+            style={{
+              left: `${particle.x}px`,
+              top: `${particle.y}px`,
+              opacity: particle.alpha,
+              backgroundColor: particle.color,
+            }}
+          />
+        ))}
 
         {balls.map((ball) => (
           <div
